@@ -1,0 +1,169 @@
+timestamp: 2015-11-08T19:14:28.188813
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2015-11-08T19:14:28.833996
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-11-08T19:14:29.327259
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2015-11-08T19:14:29.658781
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  ,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2015-11-08T19:14:29.864944
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-11-08T19:14:30.021084
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2015-11-08T19:35:41.504357
+CREATE TABLE auth_user(
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(128),
+    last_name VARCHAR(128),
+    email VARCHAR(512),
+    password VARCHAR(512),
+    registration_key VARCHAR(512),
+    reset_password_key VARCHAR(512),
+    registration_id VARCHAR(512)
+);
+success!
+timestamp: 2015-11-08T19:35:41.640406
+CREATE TABLE auth_group(
+    id SERIAL PRIMARY KEY,
+    role VARCHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-11-08T19:35:41.788512
+CREATE TABLE auth_membership(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2015-11-08T19:35:41.906575
+CREATE TABLE auth_permission(
+    id SERIAL PRIMARY KEY,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  ,
+    name VARCHAR(512),
+    table_name VARCHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2015-11-08T19:35:42.085486
+CREATE TABLE auth_event(
+    id SERIAL PRIMARY KEY,
+    time_stamp TIMESTAMP,
+    client_ip VARCHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    origin VARCHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2015-11-08T19:35:42.258462
+CREATE TABLE auth_cas(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    created_on TIMESTAMP,
+    service VARCHAR(512),
+    ticket VARCHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2015-11-08T19:35:42.404469
+CREATE TABLE personas(
+    id SERIAL PRIMARY KEY,
+    nombre TEXT,
+    apellido TEXT,
+    dni TEXT
+);
+success!
+timestamp: 2015-11-08T19:38:08.201159
+CREATE TABLE datos_persona(
+    id SERIAL PRIMARY KEY,
+    id_r INTEGER REFERENCES personas (id) ON DELETE CASCADE  ,
+    clase TEXT,
+    sexo TEXT,
+    menoresac CHAR(1),
+    comentario TEXT,
+    posted_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2015-11-08T20:07:03.314080
+ALTER TABLE personas ADD nombre__tmp VARCHAR(512);
+UPDATE personas SET nombre__tmp=nombre;
+ALTER TABLE personas DROP COLUMN nombre;
+ALTER TABLE personas ADD nombre VARCHAR(512);
+UPDATE personas SET nombre=nombre__tmp;
+ALTER TABLE personas DROP COLUMN nombre__tmp;
+timestamp: 2015-11-08T20:07:03.322766
+ALTER TABLE personas ADD dni__tmp VARCHAR(512);
+UPDATE personas SET dni__tmp=dni;
+ALTER TABLE personas DROP COLUMN dni;
+ALTER TABLE personas ADD dni VARCHAR(512);
+UPDATE personas SET dni=dni__tmp;
+ALTER TABLE personas DROP COLUMN dni__tmp;
+timestamp: 2015-11-08T20:07:03.330745
+ALTER TABLE personas ADD apellido__tmp VARCHAR(512);
+UPDATE personas SET apellido__tmp=apellido;
+ALTER TABLE personas DROP COLUMN apellido;
+ALTER TABLE personas ADD apellido VARCHAR(512);
+UPDATE personas SET apellido=apellido__tmp;
+ALTER TABLE personas DROP COLUMN apellido__tmp;
+success!
+timestamp: 2015-11-08T20:07:03.396319
+ALTER TABLE datos_persona ADD clase__tmp VARCHAR(512);
+UPDATE datos_persona SET clase__tmp=clase;
+ALTER TABLE datos_persona DROP COLUMN clase;
+ALTER TABLE datos_persona ADD clase VARCHAR(512);
+UPDATE datos_persona SET clase=clase__tmp;
+ALTER TABLE datos_persona DROP COLUMN clase__tmp;
+timestamp: 2015-11-08T20:07:03.405720
+ALTER TABLE datos_persona ADD sexo__tmp VARCHAR(512);
+UPDATE datos_persona SET sexo__tmp=sexo;
+ALTER TABLE datos_persona DROP COLUMN sexo;
+ALTER TABLE datos_persona ADD sexo VARCHAR(512);
+UPDATE datos_persona SET sexo=sexo__tmp;
+ALTER TABLE datos_persona DROP COLUMN sexo__tmp;
+success!
+timestamp: 2015-11-08T20:08:58.924566
+ALTER TABLE datos_persona DROP COLUMN posted_by;
+success!
