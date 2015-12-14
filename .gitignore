@@ -47,3 +47,5 @@ static/docs/*
 *.log
 *.bak
 *.lola
+*.orig
+*_private_db.py
