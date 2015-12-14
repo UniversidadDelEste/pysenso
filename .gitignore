@@ -46,3 +46,4 @@ static/slideshow/*
 static/docs/*
 *.log
 *.bak
+*.lola
